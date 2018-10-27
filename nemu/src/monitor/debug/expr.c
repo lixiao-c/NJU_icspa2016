@@ -21,8 +21,8 @@ static struct rule {
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
-	{"0x([0-9][a-f])+",HNUM},
-	{"$[a-z,A-Z]+",REG},	
+	{"[0][x]([0-9,a-f,A-F]){1-8}",HNUM},
+	{"[$][a-z,A-Z]+",REG},	
 	{"[0-9]+",NUM},	
 	{"\\)",')'},
 	{"\\(",'('},	
