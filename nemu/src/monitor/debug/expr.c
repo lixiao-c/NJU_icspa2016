@@ -108,7 +108,7 @@ static bool make_token(char *e) {
 						int ini;
 						if(substr_len>31)
 							assert(0);						
-						for(ini=0;ini<substr_len;ini++)						
+						for(ini=0;ini<=substr_len;ini++)						
 						{
 							tokens[nr_token].str[ini]=e[position+ini];
 						}
