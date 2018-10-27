@@ -161,6 +161,7 @@ int eval(int start,int end)
 		assert(0);
 	}
 	else if(start==end){
+		printf("%d \n", get_token_num_value(tokens[start].str));
 		return 	get_token_num_value(tokens[start].str);
 	}
 	else if(check_parentheses(start,end)){
