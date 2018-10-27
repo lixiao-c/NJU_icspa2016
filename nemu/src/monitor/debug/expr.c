@@ -201,7 +201,7 @@ uint32_t get_token_num_value(Token to){
 			ret=reg_l(R_EDI);
 	}
 	else
-		assert(0);
+		ret=0xffffffff;
 	return ret;
 }
 
