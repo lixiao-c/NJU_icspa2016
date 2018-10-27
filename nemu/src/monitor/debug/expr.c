@@ -97,7 +97,7 @@ static bool make_token(char *e) {
 					case '(':
 					case ')':
 					case EQ :
-						{
+						{						
 						tokens[nr_token].type=rules[i].token_type;
 						nr_token++;
 						if(nr_token>=32)
@@ -163,6 +163,7 @@ bool check_parentheses(int start,int end)
 uint32_t eval(int start,int end)
 {
 	if(start>end){
+		printf("%d %d \n",start,end);
 		assert(0);
 	}
 	else if(start==end){
