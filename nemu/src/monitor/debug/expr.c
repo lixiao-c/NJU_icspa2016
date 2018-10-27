@@ -136,8 +136,7 @@ static bool make_token(char *e) {
 }
 
 int get_token_num_value(char* str){
-	int i=0;
-	printf("str %s \n",str);	
+	int i=0;	
 	int ret=0;
 	while(str[i]!='\0')
 	{	
