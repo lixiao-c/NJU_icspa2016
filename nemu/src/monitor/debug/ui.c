@@ -10,6 +10,7 @@
 void cpu_exec(uint32_t);
 WP* new_wp();
 void free_wp(int wpid);
+void info_watchpoint();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -80,6 +81,12 @@ static int cmd_d(char *args){
 	}
 }
 
+static int cmd_info(char *args){
+	if(args[0]=='w')
+		info_watchpoint();
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -93,6 +100,7 @@ static struct {
 	{ "p", "expr calculate", cmd_p },
 	{ "w", "set watchpoint", cmd_w },
 	{ "d", "delete watchpoint", cmd_d },
+	{ "info", "look up watchpoint/reg info", cmd_info },
 
 	/* TODO: Add more commands */
 

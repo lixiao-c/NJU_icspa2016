@@ -43,7 +43,6 @@ WP* new_wp()
 void free_wp(int wpid)
 {
 	WP* wp=&wp_pool[wpid];
-	printf("check 1\n");
 	if(head==wp)
 		head=NULL;
 	else{	
@@ -55,13 +54,11 @@ void free_wp(int wpid)
 		temp->next=wp->next;
 		wp->next=NULL;
 	}
-	printf("check 2\n");
 	WP *free_temp=free_;
 	while(free_temp->next!=NULL)
 	{
 		free_temp=free_temp->next;
 	}
-	printf("check 3\n");
 	free_temp->next=wp;
 }
 
@@ -84,5 +81,16 @@ bool check_watchpoint()
 end:	
 	free(success_flag);
 	return ret;
+}
+
+void info_watchpoint()
+{
+	WP *temp=head;	
+	printf("WID	expr	record value\n");
+	while(temp!=NULL)
+	{
+		printf("%d	%s	0x%x\n",temp->NO,temp->expr,temp->expr_record_val);
+		temp=temp->next;
+	}
 }
 
