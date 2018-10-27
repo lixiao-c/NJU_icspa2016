@@ -26,6 +26,16 @@ WP* new_wp()
 		assert(0);
 	WP *temp=free_;
 	free_=free_->next;
+	WP *search_head=head;
+	if(head==NULL)
+		head=temp;
+	else{	
+		while(search_head->next!=NULL)
+		{
+			search_head=search_head->next;
+		}
+		search_head->next=temp;
+	}
 	temp->next=NULL;
 	return temp;
 }
