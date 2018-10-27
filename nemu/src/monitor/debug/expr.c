@@ -34,8 +34,8 @@ static struct rule {
 	{"==", EQ},					// equal
 	{"!=",UEQ},
 	{"!",'!'},
-	{"&&",AND},
-	{"||",OR},
+	{"[&][&]",AND},
+	{"[|][|]",OR}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
