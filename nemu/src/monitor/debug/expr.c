@@ -159,7 +159,7 @@ static bool make_token(char *e) {
 
 	return true; 
 }
-
+extern CPU_state cpu;
 uint32_t get_token_num_value(Token to){
 	int i;	
 	uint32_t ret=0;
@@ -184,21 +184,21 @@ uint32_t get_token_num_value(Token to){
 	}
 	else if(to.type==REG){		
 		if(strcmp(to.str,"eax")==0)
-			ret=reg_l(R_EAX);
+			ret=cpu.eax;
 		else if(strcmp(to.str,"ecx")==0)
-			ret=reg_l(R_ECX);
+			ret=cpu.ecx;
 		else if(strcmp(to.str,"edx")==0)
-			ret=reg_l(R_EDX);
+			ret=cpu.edx;
 		else if(strcmp(to.str,"ebx")==0)
-			ret=reg_l(R_EBX);
+			ret=cpu.ebx;
 		else if(strcmp(to.str,"esp")==0)
-			ret=reg_l(R_ESP);
+			ret=cpu.esp;
 		else if(strcmp(to.str,"ebp")==0)
-			ret=reg_l(R_EBP);
+			ret=cpu.ebp;
 		else if(strcmp(to.str,"esi")==0)
-			ret=reg_l(R_ESI);
+			ret=cpu.esi;
 		else if(strcmp(to.str,"edi")==0)
-			ret=reg_l(R_EDI);
+			ret=cpu.edi;
 	}
 	else
 		ret=0xffffffff;
