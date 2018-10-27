@@ -37,7 +37,7 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_b(char *args){
-	printf("args %s",args);	
+	printf("args %s \n",args);	
 	return 0;
 }
 
