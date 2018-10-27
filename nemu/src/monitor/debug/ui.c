@@ -74,7 +74,6 @@ static int cmd_d(char *args){
 	}	
 	else{
 		int wpid=args[0]-'0';
-		printf("watchpoint %d is deleted\n",wpid);
 		free_wp(wpid);
 		printf("watchpoint %d is deleted\n",wpid);
 		return 0;

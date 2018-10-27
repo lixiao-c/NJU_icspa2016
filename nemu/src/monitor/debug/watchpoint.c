@@ -33,6 +33,7 @@ WP* new_wp()
 void free_wp(int wpid)
 {
 	WP* wp=&wp_pool[wpid];
+	printf("check 1\n");
 	if(head==wp)
 		head=NULL;
 	else{	
@@ -44,11 +45,13 @@ void free_wp(int wpid)
 		temp->next=wp->next;
 		wp->next=NULL;
 	}
+	printf("check 2\n");
 	WP *free_temp=free_;
 	while(free_temp->next!=NULL)
 	{
 		free_temp=free_temp->next;
 	}
+	printf("check 3\n");
 	free_temp->next=wp;
 }
 
