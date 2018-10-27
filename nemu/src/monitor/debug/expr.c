@@ -88,7 +88,6 @@ static bool make_token(char *e) {
 				 * to record the token in the array `tokens'. For certain types
 				 * of tokens, some extra actions should be performed.
 				 */
-printf("%d\n",nr_token);
 				switch(rules[i].token_type) {
 					case '+':
 					case '-':
@@ -182,15 +181,57 @@ uint32_t eval(int start,int end)
 				list_num++;
 			else if(tokens[i].type==')')
 				list_num--;
-			else if(tokens[i].type=='*' || tokens[i].type=='/'){
+			else if(tokens[i].type=='!'){
 				if(op<0 && list_num==0)
 					op=i;			
+			}
+			else if(tokens[i].type=='*' || tokens[i].type=='/'){
+				if(list_num==0){
+					if(op<0)
+					   op=i;
+					else if(tokens[i].type=='!')
+					   op=i;				
+				}
+		
 			}
 			else if(tokens[i].type=='+' || tokens[i].type=='-'){
 				if(list_num==0){
 					if(op<0)
 						op=i;
-					else if(tokens[op].type=='*' || tokens[op].type=='/')
+					else if(tokens[i].type=='!' || 
+						tokens[op].type=='*' || tokens[op].type=='/')
+						op=i;				
+				}			
+			}
+			else if(tokens[i].type==EQ || tokens[i].type==UEQ){
+				if(list_num==0){
+					if(op<0)
+						op=i;
+					else if(tokens[i].type=='!' || 
+						tokens[i].type=='+' || tokens[i].type=='-'||
+						tokens[op].type=='*' || tokens[op].type=='/')
+						op=i;				
+				}			
+			}
+			else if(tokens[i].type==AND){
+				if(list_num==0){
+					if(op<0)
+						op=i;
+					else if(tokens[i].type=='!' || 
+						tokens[i].type==EQ || tokens[i].type==UEQ ||
+						tokens[i].type=='+' || tokens[i].type=='-' ||
+						tokens[op].type=='*' || tokens[op].type=='/')
+						op=i;				
+				}			
+			}
+			else if(tokens[i].type==OR){
+				if(list_num==0){
+					if(op<0)
+						op=i;
+					else if(tokens[i].type=='!' || tokens[i].type==AND ||
+						tokens[i].type==EQ || tokens[i].type==UEQ  ||
+						tokens[i].type=='+' || tokens[i].type=='-' ||
+						tokens[op].type=='*' || tokens[op].type=='/')
 						op=i;				
 				}			
 			}
