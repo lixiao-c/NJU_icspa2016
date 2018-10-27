@@ -104,11 +104,11 @@ static bool make_token(char *e) {
 						}
 					case NUM:
 						{
-						printf("ebter num\n");
 						tokens[nr_token].type=rules[i].token_type;
 						int ini;
 						if(substr_len>31)
-							assert(0);						
+							assert(0);
+						printf("strlen %d\n",substr_len);						
 						for(ini=0;ini<substr_len;ini++)						
 						{
 						        printf("num %c\n",e[position]);
