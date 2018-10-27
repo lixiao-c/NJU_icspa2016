@@ -107,13 +107,12 @@ static bool make_token(char *e) {
 						tokens[nr_token].type=rules[i].token_type;
 						int ini;
 						if(substr_len>31)
-							assert(0);
-						printf("strlen %d\n",substr_len);						
+							assert(0);					
 						for(ini=0;ini<substr_len;ini++)						
 						{
 						        printf("num %c\n",e[position]);
 							printf("num %c\n",e[position+substr_len]);
-							tokens[nr_token].str[ini]=e[position+ini];
+							tokens[nr_token].str[ini]=e[position-substr_len+ini];
 						}
 						tokens[nr_token].str[substr_len]='\0';
 						nr_token++;
