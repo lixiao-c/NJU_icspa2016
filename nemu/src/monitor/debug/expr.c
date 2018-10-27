@@ -22,7 +22,7 @@ static struct rule {
 	 * Pay attention to the precedence level of different rules.
 	 */
 	{"0x([0-9][a-f])+",HNUM},
-	{"$[a-z]+",REG},	
+	{"$[a-z,A-Z]+",REG},	
 	{"[0-9]+",NUM},	
 	{"\\)",')'},
 	{"\\(",'('},	
