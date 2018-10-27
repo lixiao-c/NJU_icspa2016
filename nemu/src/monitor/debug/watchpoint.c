@@ -86,10 +86,10 @@ end:
 void info_watchpoint()
 {
 	WP *temp=head;	
-	printf("WID	expr	record value\n");
+	printf("WID	expr		record value\n");
 	while(temp!=NULL)
 	{
-		printf("%d	%s	0x%x\n",temp->NO,temp->expr,temp->expr_record_val);
+		printf("%d	%s		0x%x\n",temp->NO,temp->expr,temp->expr_record_val);
 		temp=temp->next;
 	}
 }
