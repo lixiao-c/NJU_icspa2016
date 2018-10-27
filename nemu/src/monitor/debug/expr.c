@@ -356,8 +356,6 @@ uint32_t expr(char *e, bool *success) {
 
 	/* TODO: Insert codes to evaluate the expression. */
 	uint32_t ret=eval(0,nr_token-1);
-	printf("the expr value is %d (decimal)\n",ret);
-	printf("the expr value is 0x%x (hex)\n",ret);
-	return 0;
+	return ret;
 }
 

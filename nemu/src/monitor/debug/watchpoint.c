@@ -1,5 +1,6 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
+#include <stdlib.h>
 
 #define NR_WP 32
 
@@ -29,8 +30,9 @@ WP* new_wp()
 	return temp;
 }
 
-void free_wp(WP *wp)
+void free_wp(int wpid)
 {
+	WP* wp=&wp_pool[wpid];
 	if(head==wp)
 		head=NULL;
 	else{	
@@ -48,5 +50,26 @@ void free_wp(WP *wp)
 		free_temp=free_temp->next;
 	}
 	free_temp->next=wp;
+}
+
+bool check_watchpoint()
+{
+	WP *wp=head;
+	bool* success_flag=malloc(1);
+	bool ret=true;	
+	while(wp!=NULL)
+	{
+		uint32_t new_value=expr(wp->expr,success_flag);
+		if(new_value!=wp->expr_record_val){
+			printf("\nHit watchpoint %d  old value = 0x%x, new value = 0x%x .\n"
+				,wp->NO,wp->expr_record_val,new_value);
+			ret=false;
+			goto end;			
+		}
+		wp=wp->next;
+	}
+end:	
+	free(success_flag);
+	return ret;
 }
 

@@ -8,6 +8,8 @@
 #include <readline/history.h>
 
 void cpu_exec(uint32_t);
+WP* new_wp();
+void free_wp(int wpid);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -43,7 +45,37 @@ static int cmd_p(char *args){
 	}	
 	else{
 		bool* success = malloc(4);	
-		expr(args,success);	
+		uint32_t ret=expr(args,success);
+		printf("the expr value is %d (decimal)\n",ret);
+		printf("the expr value is 0x%x (hex)\n",ret);	
+		return 0;
+	}
+}
+
+static int cmd_w(char *args){
+	if(args==NULL){
+		printf("please input expr again \n");
+		return 0;	
+	}	
+	else{
+		WP* wp=new_wp();
+		strcpy(wp->expr,args);
+		bool* success = malloc(4);
+		wp->expr_record_val=expr(args,success);
+		printf("watchpoint %d is set\n",wp->NO);
+		return 0;
+	}
+}
+
+static int cmd_d(char *args){
+	if(args==NULL){
+		printf("please input expr again \n");
+		return 0;	
+	}	
+	else{
+		int wpid=args[0]-'0';
+		free_wp(wpid);
+		printf("watchpoint %d is deleted\n",wpid);
 		return 0;
 	}
 }
@@ -59,6 +91,8 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "p", "expr calculate", cmd_p },
+	{ "w", "set watchpoint", cmd_w },
+	{ "d", "delete watchpoint", cmd_d },
 
 	/* TODO: Add more commands */
 
