@@ -99,7 +99,7 @@ static bool make_token(char *e) {
 					case EQ :
 						{						
 						tokens[nr_token].type=rules[i].token_type;
-						nr_token++;
+						nr_token++;printf("%d\n",nr_token);
 						if(nr_token>=32)
 							assert(0);
 						break;
