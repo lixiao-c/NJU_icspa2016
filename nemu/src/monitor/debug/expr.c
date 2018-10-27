@@ -104,12 +104,14 @@ static bool make_token(char *e) {
 						}
 					case NUM:
 						{
+						printf("ebter num\n");
 						tokens[nr_token].type=rules[i].token_type;
 						int ini;
 						if(substr_len>31)
 							assert(0);						
 						for(ini=0;ini<=substr_len;ini++)						
 						{
+						printf("ebter for num\n");
 							tokens[nr_token].str[ini]=e[position+ini];
 						}
 						tokens[nr_token].str[substr_len]='\0';
@@ -161,7 +163,6 @@ int eval(int start,int end)
 		assert(0);
 	}
 	else if(start==end){
-		printf("%d \n", get_token_num_value(tokens[start].str));
 		return 	get_token_num_value(tokens[start].str);
 	}
 	else if(check_parentheses(start,end)){
