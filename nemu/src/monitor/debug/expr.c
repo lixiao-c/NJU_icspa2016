@@ -213,7 +213,7 @@ uint32_t expr(char *e, bool *success) {
 	}
 
 	/* TODO: Insert codes to evaluate the expression. */
-	printf("the expr value is %d\n",eval(0,nr_token));
+	printf("the expr value is %d\n",eval(0,nr_token-1));
 	//printf("num value%d \n",get_token_num_value("123"));
 	return 0;
 }
