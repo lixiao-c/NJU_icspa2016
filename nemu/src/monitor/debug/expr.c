@@ -135,9 +135,9 @@ static bool make_token(char *e) {
 	return true; 
 }
 
-int get_token_num_value(char* str){
+uint32_t get_token_num_value(char* str){
 	int i=0;	
-	int ret=0;
+	uint32_t ret=0;
 	while(str[i]!='\0')
 	{	
 		ret=ret*10;		
@@ -154,7 +154,7 @@ bool check_parentheses(int start,int end)
 	return false;
 }
 
-int eval(int start,int end)
+uint32_t eval(int start,int end)
 {
 	if(start>end){
 		assert(0);
@@ -188,8 +188,8 @@ int eval(int start,int end)
 				}			
 			}
 		}
-		int val1=eval(start,op-1);
-		int val2=eval(op+1,end);
+		uint32_t val1=eval(start,op-1);
+		uint32_t val2=eval(op+1,end);
 		switch(tokens[op].type){
 			case '+':
 				return val1+val2;
@@ -213,7 +213,6 @@ uint32_t expr(char *e, bool *success) {
 
 	/* TODO: Insert codes to evaluate the expression. */
 	printf("the expr value is %d\n",eval(0,nr_token-1));
-	//printf("num value%d \n",get_token_num_value("123"));
 	return 0;
 }
 
