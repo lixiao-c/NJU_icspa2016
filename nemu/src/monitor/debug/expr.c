@@ -88,7 +88,7 @@ static bool make_token(char *e) {
 				 * to record the token in the array `tokens'. For certain types
 				 * of tokens, some extra actions should be performed.
 				 */
-
+printf("%d\n",nr_token);
 				switch(rules[i].token_type) {
 					case '+':
 					case '-':
@@ -99,7 +99,7 @@ static bool make_token(char *e) {
 					case EQ :
 						{						
 						tokens[nr_token].type=rules[i].token_type;
-						nr_token++;printf("%d\n",nr_token);
+						nr_token++;
 						if(nr_token>=32)
 							assert(0);
 						break;
