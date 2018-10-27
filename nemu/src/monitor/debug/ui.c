@@ -37,10 +37,15 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_p(char *args){
-	printf("args %s \n",args);
-	bool* success = malloc(4);	
-	expr(args,success);	
-	return 0;
+	if(args==NULL){
+		printf("please input expr again \n");
+		return 0;	
+	}	
+	else{
+		bool* success = malloc(4);	
+		expr(args,success);	
+		return 0;
+	}
 }
 
 static int cmd_help(char *args);
