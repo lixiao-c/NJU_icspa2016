@@ -135,7 +135,7 @@ static bool make_token(char *e) {
 	return true; 
 }
 
-uint32_t get_token_num_value(char* str){
+int get_token_num_value(char* str){
 	int i=0;
 	//printf("num %d \n",i);	
 	int ret=0;
@@ -147,16 +147,65 @@ uint32_t get_token_num_value(char* str){
 	}
 	return ret;
 }
-/*uint32_t eval(Token *tokens,int start,int end)
+
+bool check_parentheses(int start,int end)
 {
-	if(start>end)
-	{
+	if(tokens[start].type=='(' && tokens[end].type==')')
+		return true;
+	return false;
+}
+
+int eval(int start,int end)
+{
+	if(start>end){
 		assert(0);
 	}
 	else if(start==end){
-		return 	tokens[start].
+		return 	get_token_num_value(tokens[start].str);
 	}
-}*/
+	else if(check_parentheses(start,end)){
+		return eval(start+1,end-1);
+	}
+	else{
+		int op=-1;
+		int list_num=0;//'(' & ')' num
+		int i;
+		for(i=start;i<=end;i++)
+		{
+			if(tokens[i].type=='(')
+				list_num++;
+			else if(tokens[i].type==')')
+				list_num--;
+			else if(tokens[i].type=='*' || tokens[i].type=='/'){
+				if(op<0 && list_num==0)
+					op=i;			
+			}
+			else if(tokens[i].type=='+' || tokens[i].type=='-'){
+				if(list_num==0){
+					if(op<0)
+						op=i;
+					else if(tokens[op].type=='*' || tokens[op].type=='/')
+						op=i;				
+				}			
+			}
+		}
+		int val1=eval(start,op-1);
+		int val2=eval(op+1,end);
+		switch(tokens[op].type){
+			case '+':
+				return val1+val2;
+			case '-':
+				return val1-val2;
+			case '*':
+				return val1*val2;
+			case '/':
+				return val1/val2;	
+			default:
+				assert(0);	
+		}	
+	}
+}
+
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
@@ -164,8 +213,8 @@ uint32_t expr(char *e, bool *success) {
 	}
 
 	/* TODO: Insert codes to evaluate the expression. */
-	printf("num value%d \n",get_token_num_value("123"));
-	//panic("please implement me");
+	printf("the expr value is %d\n",eval(0,nr_token));
+	//printf("num value%d \n",get_token_num_value("123"));
 	return 0;
 }
 
