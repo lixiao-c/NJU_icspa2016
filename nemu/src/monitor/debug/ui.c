@@ -36,7 +36,7 @@ static int cmd_q(char *args) {
 	return -1;
 }
 
-static int cmd_b(char *args){
+static int cmd_p(char *args){
 	printf("args %s \n",args);	
 	return 0;
 }
@@ -51,7 +51,7 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-	{ "b", "expr calculate", cmd_b },
+	{ "p", "expr calculate", cmd_p },
 
 	/* TODO: Add more commands */
 
