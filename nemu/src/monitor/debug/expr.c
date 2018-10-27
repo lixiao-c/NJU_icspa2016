@@ -109,9 +109,10 @@ static bool make_token(char *e) {
 						int ini;
 						if(substr_len>31)
 							assert(0);						
-						for(ini=0;ini<=substr_len;ini++)						
+						for(ini=0;ini<substr_len;ini++)						
 						{
-						printf("ebter for num\n");
+						        printf("num %c\n",e[position]);
+							printf("num %c\n",e[position+substr_len]);
 							tokens[nr_token].str[ini]=e[position+ini];
 						}
 						tokens[nr_token].str[substr_len]='\0';
