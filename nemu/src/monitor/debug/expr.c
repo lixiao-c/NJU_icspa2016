@@ -95,7 +95,11 @@ static bool make_token(char *e) {
 					case '/':
 					case '(':
 					case ')':
+					case '!':
 					case EQ :
+					case UEQ :
+					case AND :
+					case OR :
 						{						
 						tokens[nr_token].type=rules[i].token_type;
 						nr_token++;
@@ -108,12 +112,28 @@ static bool make_token(char *e) {
 						break;
 						}
 					case NUM:
+					case HNUM:
 						{
 						tokens[nr_token].type=rules[i].token_type;
 						int ini;
 						if(substr_len>31)
 							assert(0);					
 						for(ini=0;ini<substr_len;ini++)						
+						{
+							tokens[nr_token].str[ini]=e[position-substr_len+ini];
+						}
+						tokens[nr_token].str[substr_len]='\0';
+						nr_token++;
+						if(nr_token>=32)
+							assert(0);
+						break;
+						}
+					case REG:{// rm $
+						tokens[nr_token].type=rules[i].token_type;
+						int ini;
+						if(substr_len>31)
+							assert(0);					
+						for(ini=1;ini<substr_len;ini++)						
 						{
 							tokens[nr_token].str[ini]=e[position-substr_len+ini];
 						}
@@ -140,15 +160,48 @@ static bool make_token(char *e) {
 	return true; 
 }
 
-uint32_t get_token_num_value(char* str){
-	int i=0;	
+uint32_t get_token_num_value(Token to){
+	int i;	
 	uint32_t ret=0;
-	while(str[i]!='\0')
-	{	
+	char* str=to.str;
+	if(to.type==NUM){
+		i=0;		
+		while(str[i]!='\0')
+		{	
 		ret=ret*10;		
 		ret+=str[i]-'0';
 		i++;
+		}
 	}
+	else if(to.type==HNUM){
+		i=2;
+		while(str[i]!='\0')
+		{	
+		ret=ret*16;		
+		ret+=str[i]-'0';
+		i++;
+		}
+	}
+	else if(to.type==REG){		
+		if(strcmp(to.str,"eax")==0)
+			ret=reg_l(R_EAX);
+		else if(strcmp(to.str,"ecx")==0)
+			ret=reg_l(R_ECX);
+		else if(strcmp(to.str,"edx")==0)
+			ret=reg_l(R_EDX);
+		else if(strcmp(to.str,"ebx")==0)
+			ret=reg_l(R_EBX);
+		else if(strcmp(to.str,"esp")==0)
+			ret=reg_l(R_ESP);
+		else if(strcmp(to.str,"ebp")==0)
+			ret=reg_l(R_EBP);
+		else if(strcmp(to.str,"esi")==0)
+			ret=reg_l(R_ESI);
+		else if(strcmp(to.str,"edi")==0)
+			ret=reg_l(R_EDI);
+	}
+	else
+		assert(0);
 	return ret;
 }
 
@@ -166,7 +219,7 @@ uint32_t eval(int start,int end)
 		assert(0);
 	}
 	else if(start==end){
-		return 	get_token_num_value(tokens[start].str);
+		return 	get_token_num_value(tokens[start]);
 	}
 	else if(check_parentheses(start,end)){
 		return eval(start+1,end-1);
@@ -236,24 +289,59 @@ uint32_t eval(int start,int end)
 				}			
 			}
 		}
-		uint32_t val1=eval(start,op-1);
-		uint32_t val2=eval(op+1,end);
+		
+		uint32_t val1=0;
+		uint32_t val2=0;
+		if(op==start){//! * etc..
+			val1=eval(op+1,end);
+		}
+		else{		
+			val1=eval(start,op-1);
+			val2=eval(op+1,end);
+		}
 		switch(tokens[op].type){
 			case '+':
 				return val1+val2;
 			case '-':
 				return val1-val2;
-			case '*':
-				return val1*val2;
+			case '*':{
+				if(op==start)
+					return swaddr_read(val1,4);
+				else
+					return val1*val2;
+				}
 			case '/':
 				return val1/val2;
-			case EQ:
-				{
+			case EQ:{
 					if(val1==val2)
 						return 1;
 					else
 						return 0;
-				}	
+				}
+			case UEQ:{
+					if(val1!=val2)
+						return 1;
+					else
+						return 0;
+				}
+			case AND:{
+					if(val1!=val2)
+						return 1;
+					else
+						return 0;
+				}
+			case OR:{
+					if(val1!=val2)
+						return 1;
+					else
+						return 0;
+				}
+			case '!':{
+					if(!val1)
+						return 1;
+					else
+						return 0;
+				}
 			default:
 				assert(0);	
 		}	
