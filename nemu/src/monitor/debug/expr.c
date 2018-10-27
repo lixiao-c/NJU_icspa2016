@@ -106,12 +106,13 @@ static bool make_token(char *e) {
 						{
 						tokens[nr_token].type=rules[i].token_type;
 						int ini;
-						if(substr_len>32)
+						if(substr_len>31)
 							assert(0);						
 						for(ini=0;ini<substr_len;ini++)						
 						{
 							tokens[nr_token].str[ini]=e[position+ini];
 						}
+						tokens[nr_token].str[substr_len]='\0';
 						nr_token++;
 						if(nr_token>=32)
 							assert(0);
@@ -134,6 +135,28 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+uint32_t get_token_num_value(char* str){
+	int i=0;
+	//printf("num %d \n",i);	
+	int ret=0;
+	while(str[i]!='\0')
+	{	
+		ret=ret*10;		
+		ret+=str[i]-'0';
+		i++;
+	}
+	return ret;
+}
+/*uint32_t eval(Token *tokens,int start,int end)
+{
+	if(start>end)
+	{
+		assert(0);
+	}
+	else if(start==end){
+		return 	tokens[start].
+	}
+}*/
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
@@ -141,7 +164,8 @@ uint32_t expr(char *e, bool *success) {
 	}
 
 	/* TODO: Insert codes to evaluate the expression. */
-	panic("please implement me");
+	printf("num value%d \n",get_token_num_value("123"));
+	//panic("please implement me");
 	return 0;
 }
 

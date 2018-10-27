@@ -37,7 +37,9 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_p(char *args){
-	printf("args %s \n",args);	
+	printf("args %s \n",args);
+	bool* success = malloc(4);	
+	expr(args,success);	
 	return 0;
 }
 
