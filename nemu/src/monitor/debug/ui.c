@@ -93,7 +93,8 @@ static int cmd_info(char *args){
 		printf("esp	0x%x\n",reg_l(R_ESP));
 		printf("ebp	0x%x\n",reg_l(R_EBP));	
 		printf("esi	0x%x\n",reg_l(R_ESI));	
-		printf("edi	0x%x\n",reg_l(R_EDI));		
+		printf("edi	0x%x\n",reg_l(R_EDI));	
+		printf("eip	0x%x\n",cpu.eip);		
 	}
 	return 0;
 }
