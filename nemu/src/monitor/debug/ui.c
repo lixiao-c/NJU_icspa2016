@@ -102,7 +102,6 @@ static int cmd_x(char *args){
 	for(j=0;j<len-i-1;j++)
 		str2[j]=args[i+1+j];
 	str2[len]='\0';
-	printf("str1%s, str2%s",str1,str2);
 	bool* success=malloc(1);	
 	int num=expr(str1,success);
 	int addr=expr(str2,success);
