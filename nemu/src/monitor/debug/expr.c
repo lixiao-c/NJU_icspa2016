@@ -199,6 +199,8 @@ uint32_t get_token_num_value(Token to){
 			ret=cpu.esi;
 		else if(strcmp(to.str,"edi")==0)
 			ret=cpu.edi;
+		else if(strcmp(to.str,"eip")==0)
+			ret=cpu.eip;
 	}
 	else
 		ret=0xffffffff;
