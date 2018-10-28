@@ -81,6 +81,11 @@ static int cmd_d(char *args){
 	}
 }
 
+static int cmd_x(char *args){
+	printf("%s \n",args);
+	return 0;
+}
+
 static int cmd_info(char *args){
 	if(args[0]=='w')
 		info_watchpoint();
@@ -113,7 +118,7 @@ static struct {
 	{ "w", "set watchpoint", cmd_w },
 	{ "d", "delete watchpoint", cmd_d },
 	{ "info", "look up watchpoint/reg info", cmd_info },
-
+	{ "x", "print memory", cmd_x },
 	/* TODO: Add more commands */
 
 };
