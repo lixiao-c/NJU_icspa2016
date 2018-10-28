@@ -87,6 +87,13 @@ static int cmd_info(char *args){
 	else if(args[0]=='r'){
 		printf("REG	VALUE\n");
 		printf("eax	0x%x\n",reg_l(R_EAX));	
+		printf("ecx	0x%x\n",reg_l(R_ECX));	
+		printf("ebx	0x%x\n",reg_l(R_EDX));	
+		printf("edx	0x%x\n",reg_l(R_EBX));	
+		printf("esp	0x%x\n",reg_l(R_ESP));
+		printf("ebp	0x%x\n",reg_l(R_EBP));	
+		printf("esi	0x%x\n",reg_l(R_ESI));	
+		printf("edi	0x%x\n",reg_l(R_EDI));		
 	}
 	return 0;
 }
