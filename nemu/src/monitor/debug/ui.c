@@ -4,6 +4,7 @@
 #include "nemu.h"
 
 #include <stdlib.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -94,6 +95,14 @@ static int cmd_x(char *args){
 		return 0;
 	}
 	char str1[10],str2[32];
+	int j;	
+	for(j=0;j<i;j++)
+		str1[j]=args[j];
+	str1[i]='\0';
+	for(j=0;j<len-i-1;j++)
+		str2[j]=args[i+1+j];
+	str2[len]='\0';
+	printf("str1%s, str2%s",str1,str2);
 	bool* success=malloc(1);	
 	int num=expr(str1,success);
 	int addr=expr(str2,success);
