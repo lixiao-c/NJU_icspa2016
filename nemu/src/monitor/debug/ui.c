@@ -84,6 +84,10 @@ static int cmd_d(char *args){
 static int cmd_info(char *args){
 	if(args[0]=='w')
 		info_watchpoint();
+	else if(args[0]=='r'){
+		printf("REG	VALUE\n");
+		printf("eax	0x%x\n",reg_l(R_EAX));	
+	}
 	return 0;
 }
 
