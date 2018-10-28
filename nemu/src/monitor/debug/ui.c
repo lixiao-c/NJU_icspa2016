@@ -82,7 +82,24 @@ static int cmd_d(char *args){
 }
 
 static int cmd_x(char *args){
-	printf("%s \n",args);
+	int i=0;
+	int len=strlen(args);
+	while(i<len){	
+		if(args[i]==' ')
+			break;
+		i++;
+	}
+	if(i==len){
+		printf("please input again\n");
+		return 0;
+	}
+	char str1[10],str2[32];
+	bool* success=malloc(1);	
+	int num=expr(str1,success);
+	int addr=expr(str2,success);
+	printf("addr		value\n");
+	for(i=0;i<num;i++)
+		printf("0x%x		0x%x\n",addr+i*4,swaddr_read(addr+i*4,4));
 	return 0;
 }
 
