@@ -182,7 +182,8 @@ uint32_t get_token_num_value(Token to){
 		i++;
 		}
 	}
-	else if(to.type==REG){		
+	else if(to.type==REG){
+		printf("reg = %s",to.str);		
 		if(strcmp(to.str,"eax")==0)
 			ret=cpu.eax;
 		else if(strcmp(to.str,"ecx")==0)
