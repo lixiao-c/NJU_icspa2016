@@ -44,7 +44,7 @@ void free_wp(int wpid)
 {
 	WP* wp=&wp_pool[wpid];
 	if(head==wp)
-		head=NULL;
+		head=head->next;
 	else{	
 		WP *temp=head;
 		while(temp->next!=wp)
@@ -52,8 +52,8 @@ void free_wp(int wpid)
 			temp=temp->next;
 		}
 		temp->next=wp->next;
-		wp->next=NULL;
 	}
+	wp->next=NULL;
 	WP *free_temp=free_;
 	while(free_temp->next!=NULL)
 	{

@@ -55,6 +55,8 @@ static int cmd_p(char *args){
 }
 
 static int cmd_si(char *args) {
+	if(args==NULL)
+		printf("please input args\n");
 	bool* success=malloc(1);	
 	int num=expr(args,success);
 	cpu_exec(num);
