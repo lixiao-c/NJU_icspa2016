@@ -54,6 +54,13 @@ static int cmd_p(char *args){
 	}
 }
 
+static int cmd_si(char *args) {
+	bool* success=malloc(1);	
+	int num=expr(args,success);
+	cpu_exec(num);
+	return 0;
+}
+
 static int cmd_w(char *args){
 	if(args==NULL){
 		printf("please input expr again \n");
@@ -139,6 +146,7 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
+	{ "si", "exec by step n", cmd_si },
 	{ "p", "expr calculate", cmd_p },
 	{ "w", "set watchpoint", cmd_w },
 	{ "d", "delete watchpoint", cmd_d },
