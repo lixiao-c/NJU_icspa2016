@@ -70,6 +70,7 @@ bool check_watchpoint()
 	while(wp!=NULL)
 	{
 		uint32_t new_value=expr(wp->expr,success_flag);
+		printf("new value %d\n",new_value);
 		if(new_value!=wp->expr_record_val){
 			printf("\nHit watchpoint %d  old value = 0x%x, new value = 0x%x .\n"
 				,wp->NO,wp->expr_record_val,new_value);
