@@ -30,10 +30,11 @@ make_helper(concat(decode_si_, SUFFIX)) {
 	 * by `eip'. Interpret the result as an signed immediate, and assign
 	 * it to op_src->simm.
 	 *
-	op_src->simm = ???
 	 */
-	panic("please implement me");
-
+	// signed ectend  0x00001001 --> 0x11111001
+	op_src->simm = instr_fetch(eip,DATA_BYTE);
+	op_src->simm=(op_src->simm)<<(32-8*DATA_BYTE);
+	op_src->simm=(op_src->simm)>>(32-8*DATA_BYTE);
 	op_src->val = op_src->simm;
 
 #ifdef DEBUG
