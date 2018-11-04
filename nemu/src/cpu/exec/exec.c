@@ -24,7 +24,7 @@ make_group(group1_b,
 
 /* 0x81 */
 make_group(group1_v,
-	inv, inv, inv, inv, 
+	and_i2rm_v, inv, inv, inv, 
 	inv, inv, inv, inv)
 
 /* 0x83 */
