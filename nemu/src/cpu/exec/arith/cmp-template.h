@@ -3,8 +3,8 @@
 #define instr cmp
 
 static void do_execute () {
-	DATA_TYPE temp = op_src->val+op_dest->val;
-	long long result1= ((long long)op_src->val+(long long)op_dest->val)>>(8*DATA_BYTE);
+	DATA_TYPE temp = op_src->val-op_dest->val;
+	long long result1= ((long long)op_src->val-(long long)op_dest->val)>>(8*DATA_BYTE);
 	cpu.eflags.cf=result1&1;
 	
 	if((MSB(op_dest->val)!=MSB(op_src->val))&&(MSB(op_dest->val)!=MSB(temp)))
