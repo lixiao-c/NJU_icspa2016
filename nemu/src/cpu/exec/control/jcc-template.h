@@ -5,9 +5,7 @@
 static void do_execute() {
 	DATA_TYPE tail=op_src->val;
 	uint32_t temp=cpu.eip+tail;
-	if(DATA_BYTE==1)
-		temp&=0xff;
-	else if(DATA_BYTE==2)
+	if(DATA_BYTE==2)
 		temp&=0xffff;
 	if(cpu.eflags.zf==1)
 		cpu.eip=temp;
