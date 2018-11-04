@@ -6,7 +6,7 @@ static void do_execute() {
 	if(instr_fetch(cpu.eip,1)==0xe8){
 		//push eip
 		cpu.esp=cpu.esp-4;
-		swaddr_write(cpu.esp,4,cpu.eip);
+		swaddr_write(cpu.esp,4,cpu.eip+4);
 		//change eip
 		cpu.eip+=op_src->val;
 		print_asm("call $0x%x",cpu.eip);
