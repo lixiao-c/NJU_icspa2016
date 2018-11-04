@@ -89,4 +89,7 @@ void restart() {
 
 	/* Initialize DRAM. */
 	init_ddr3();
+	
+	/* init eflags*/
+	eflags.eflags_val=0x00000002;
 }
