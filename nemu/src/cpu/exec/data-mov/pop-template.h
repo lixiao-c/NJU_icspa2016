@@ -13,7 +13,7 @@ static void do_execute() {
 	}
 	else{
 		swaddr_write(op_src->val,4,cpu.esp);
-		cpu.esp=cpu.esp-4;
+		cpu.esp=cpu.esp+4;
 	}
 }
 
