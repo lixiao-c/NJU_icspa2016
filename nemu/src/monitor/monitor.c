@@ -91,5 +91,5 @@ void restart() {
 	init_ddr3();
 	
 	/* init eflags*/
-	eflags.eflags_val=0x00000002;
+	cpu.eflags.eflags_val=0x00000002;
 }

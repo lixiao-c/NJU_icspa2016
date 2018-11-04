@@ -30,26 +30,28 @@ typedef struct {
 
 	swaddr_t eip;
 
+	union Eflags{
+		struct{
+			uint32_t cf:1;
+			uint32_t   :1;
+			uint32_t pf:1;
+			uint32_t   :3;
+			uint32_t zf:1;
+			uint32_t sf:1;
+			uint32_t   :1;
+			uint32_t If:1;
+			uint32_t df:1;
+			uint32_t of:1;
+			uint32_t  :20;	
+		};
+		uint32_t eflags_val;
+	} eflags;
+
 } CPU_state;
 
 extern CPU_state cpu;
 
-union Eflags{
-	struct{
-		uint32_t cf:1;
-		uint32_t   :1;
-		uint32_t pf:1;
-		uint32_t   :3;
-		uint32_t zf:1;
-		uint32_t sf:1;
-		uint32_t   :1;
-		uint32_t If:1;
-		uint32_t df:1;
-		uint32_t of:1;
-		uint32_t  :20;	
-	};
-	uint32_t eflags_val;
-} eflags;
+
 
 static inline int check_reg_index(int index) {
 	assert(index >= 0 && index < 8);
